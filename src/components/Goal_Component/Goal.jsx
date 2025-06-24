@@ -23,7 +23,7 @@ const Goal = ({ user }) => {
         const fetchGoals = async () => {
             try {
                 const userId = user._id;
-                const response = await axios.get(`http://localhost:8000/goal/${userId}`, { withCredentials: true });
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/goal/${userId}`, { withCredentials: true });
                 setGoals(response.data.goals);
             } catch (error) {
                 console.error('Error fetching goals:', error);
