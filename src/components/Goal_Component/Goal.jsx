@@ -37,7 +37,7 @@ const Goal = ({ user }) => {
         e.preventDefault();
         try {
             const formData = { user, name, targetAmount, currentAmount, deadline, description };
-            const response = await axios.post('http://localhost:8000/goal/addGoal', formData, { withCredentials: true });
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/goal/addGoal`, formData, { withCredentials: true });
             setGoals((prev) => [...prev, response.data.Goal]);
             setName('');
             setTargetAmount('');
@@ -58,7 +58,7 @@ const Goal = ({ user }) => {
             const goal = goals.find((goal) => goal._id === goalId);
             const newAmount = goal.currentAmount + amount;
 
-            await axios.put(`http://localhost:8000/goal/update/${goalId}`, { currentAmount: newAmount }, { withCredentials: true });
+            await axios.put(`${import.meta.env.VITE_API_URL}/goal/update/${goalId}`, { currentAmount: newAmount }, { withCredentials: true });
 
             setGoals((prevGoals) =>
                 prevGoals.map((goal) =>
@@ -80,7 +80,7 @@ const Goal = ({ user }) => {
             const newAmount = goal.currentAmount - amount;
 
             if (newAmount >= 0) {
-                await axios.put(`http://localhost:8000/goal/update/${goalId}`, { currentAmount: newAmount }, { withCredentials: true });
+                await axios.put(`${import.meta.env.VITE_API_URL}/goal/update/${goalId}`, { currentAmount: newAmount }, { withCredentials: true });
 
                 setGoals((prevGoals) =>
                     prevGoals.map((goal) =>
